@@ -1,0 +1,80 @@
+[gd_scene load_steps=12 format=3 uid="uid://bb3i7h6ftlhql"]
+
+[ext_resource type="Script" path="res://Scripts/Monsters/fireball.gd" id="1_p3dom"]
+
+[sub_resource type="Gradient" id="Gradient_4ef0q"]
+offsets = PackedFloat32Array(0, 0.457983, 1)
+colors = PackedColorArray(0.866667, 0.113725, 0.180392, 1, 0.151276, 0.151276, 0.151276, 1, 0.839216, 0.188235, 0.054902, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_e7tur"]
+gradient = SubResource("Gradient_4ef0q")
+
+[sub_resource type="Curve" id="Curve_stxxn"]
+min_value = -1.0
+_data = [Vector2(0, -0.635093), 0.0, 0.0, 0, 0, Vector2(0.255639, 1), 0.0, 0.0, 0, 0, Vector2(1, -0.312112), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_4xm18"]
+curve = SubResource("Curve_stxxn")
+
+[sub_resource type="Curve" id="Curve_ppb5m"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.289474, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.495342), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_iou14"]
+curve = SubResource("Curve_ppb5m")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_o1khq"]
+angle_max = 360.0
+direction = Vector3(-0.01, 1, 0.425)
+spread = 9.153
+initial_velocity_max = 1.0
+angular_velocity_max = 40.0
+gravity = Vector3(0, 0, 0)
+linear_accel_min = 1.0
+linear_accel_max = 5.0
+scale_min = 0.01
+scale_max = 0.5
+scale_curve = SubResource("CurveTexture_iou14")
+color_initial_ramp = SubResource("GradientTexture1D_e7tur")
+hue_variation_min = -0.2
+hue_variation_max = 0.2
+hue_variation_curve = SubResource("CurveTexture_4xm18")
+turbulence_enabled = true
+turbulence_noise_speed_random = 0.07
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_grkmi"]
+transparency = 1
+blend_mode = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.941176, 0.180392, 0, 1)
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_rupel"]
+material = SubResource("StandardMaterial3D_grkmi")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_kkd10"]
+radius = 0.239616
+
+[node name="fireball" type="Area3D"]
+script = ExtResource("1_p3dom")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+amount = 500
+lifetime = 0.3
+interp_to_end = 1.0
+randomness = 1.0
+local_coords = true
+draw_order = 3
+process_material = SubResource("ParticleProcessMaterial_o1khq")
+draw_pass_1 = SubResource("QuadMesh_rupel")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_kkd10")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

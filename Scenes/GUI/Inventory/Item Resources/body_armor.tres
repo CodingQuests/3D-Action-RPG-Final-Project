@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://crd3vjm42py0p"]
+
+[ext_resource type="Texture2D" uid="uid://bqw11syqkiqou" path="res://Assets/16x16 RPG Item Pack/Item__57.png" id="1_hlu3f"]
+[ext_resource type="Script" path="res://Scripts/GUI/Inventory/item_data.gd" id="2_moc7l"]
+
+[resource]
+script = ExtResource("2_moc7l")
+type = 2
+item_name = "body armor"
+item_damage = 2
+item_health = 0
+item_defense = 5
+stackable = false
+count = 1
+description = "This is a long Sword!"
+item_texture = ExtResource("1_hlu3f")

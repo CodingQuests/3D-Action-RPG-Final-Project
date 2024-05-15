@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://c21ldms8ump3i"]
+
+[ext_resource type="Script" path="res://Scripts/GUI/Inventory/item_data.gd" id="1_f3yi5"]
+[ext_resource type="Texture2D" uid="uid://ckfasjsi5krbd" path="res://Assets/16x16 RPG Item Pack/Item__00.png" id="1_k25ci"]
+
+[resource]
+script = ExtResource("1_f3yi5")
+type = 0
+item_name = "Default Sword"
+item_damage = 2
+item_health = 0
+item_defense = 0
+stackable = false
+count = 0
+description = "This is a default Sword!"
+item_texture = ExtResource("1_k25ci")

@@ -1,0 +1,135 @@
+[gd_scene load_steps=21 format=3 uid="uid://4gy2bbfqym7x"]
+
+[ext_resource type="Shader" uid="uid://dgwac6mam38tg" path="res://VFX/Shaders/s_simple1.tres" id="1_fj2r2"]
+[ext_resource type="Texture2D" uid="uid://cj0t7xony6e4r" path="res://VFX/Textures/T_fl81_vfx.png" id="2_h2jjp"]
+[ext_resource type="Shader" uid="uid://bc0h30a246uhg" path="res://VFX/Shaders/s_simple2.tres" id="3_uqmm6"]
+[ext_resource type="Texture2D" uid="uid://cdga0j4g0dlx3" path="res://VFX/Textures/T_basic1_vfx.PNG" id="4_uko3m"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8fysc"]
+render_priority = 0
+shader = ExtResource("1_fj2r2")
+shader_parameter/Proximity_Fade = 0.3
+shader_parameter/Main_Texture = ExtResource("2_h2jjp")
+
+[sub_resource type="Curve" id="Curve_vghbg"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.498551, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_a22ip"]
+curve = SubResource("Curve_vghbg")
+
+[sub_resource type="Gradient" id="Gradient_fxs2d"]
+colors = PackedColorArray(8, 0.8, 0, 1, 1, 0.5, 0.2, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_oe0bv"]
+gradient = SubResource("Gradient_fxs2d")
+use_hdr = true
+
+[sub_resource type="Curve" id="Curve_1ccjx"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_xtexf"]
+curve = SubResource("Curve_1ccjx")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wygbl"]
+angle_min = -180.0
+angle_max = 180.0
+gravity = Vector3(0, 0, 0)
+scale_min = 3.0
+scale_max = 3.5
+scale_curve = SubResource("CurveTexture_xtexf")
+color_ramp = SubResource("GradientTexture1D_oe0bv")
+alpha_curve = SubResource("CurveTexture_a22ip")
+
+[sub_resource type="QuadMesh" id="QuadMesh_6y3g8"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_p4jgy"]
+render_priority = 0
+shader = ExtResource("3_uqmm6")
+shader_parameter/Outline = 0.0
+shader_parameter/Hit_texture = ExtResource("4_uko3m")
+
+[sub_resource type="Curve" id="Curve_5wnfu"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_5s648"]
+curve = SubResource("Curve_5wnfu")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_mxkka"]
+particle_flag_align_y = true
+direction = Vector3(0, 1, 0)
+spread = 180.0
+initial_velocity_min = 4.0
+initial_velocity_max = 6.0
+gravity = Vector3(0, 0, 0)
+scale_min = 1.2
+scale_max = 1.6
+color = Color(2.5, 1, 0.5, 1)
+alpha_curve = SubResource("CurveTexture_5s648")
+
+[sub_resource type="QuadMesh" id="QuadMesh_wwfif"]
+size = Vector2(0.05, 0.3)
+
+[sub_resource type="Animation" id="Animation_hoqvr"]
+resource_name = "hit"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hit effect:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("sparks:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wanpx"]
+_data = {
+"hit": SubResource("Animation_hoqvr")
+}
+
+[node name="HIT VFX" type="Node3D"]
+
+[node name="Hit effect" type="GPUParticles3D" parent="."]
+layers = 4
+material_override = SubResource("ShaderMaterial_8fysc")
+emitting = false
+amount = 1
+lifetime = 0.25
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_wygbl")
+draw_pass_1 = SubResource("QuadMesh_6y3g8")
+
+[node name="sparks" type="GPUParticles3D" parent="."]
+layers = 4
+material_override = SubResource("ShaderMaterial_p4jgy")
+emitting = false
+amount = 15
+lifetime = 0.25
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_mxkka")
+draw_pass_1 = SubResource("QuadMesh_wwfif")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_wanpx")
+}

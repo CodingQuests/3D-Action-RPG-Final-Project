@@ -1,0 +1,70 @@
+[gd_scene load_steps=3 format=3 uid="uid://65i6qc317fkr"]
+
+[ext_resource type="Script" path="res://Scripts/GUI/shop.gd" id="1_iy3rt"]
+[ext_resource type="Texture2D" uid="uid://ckfasjsi5krbd" path="res://Assets/16x16 RPG Item Pack/Item__00.png" id="2_akjtp"]
+
+[node name="shop" type="CanvasLayer"]
+script = ExtResource("1_iy3rt")
+
+[node name="Panel" type="Panel" parent="."]
+process_mode = 3
+offset_left = 64.0
+offset_top = 64.0
+offset_right = 1088.0
+offset_bottom = 576.0
+
+[node name="shop_items" type="GridContainer" parent="."]
+offset_left = 704.0
+offset_top = 168.0
+offset_right = 744.0
+offset_bottom = 208.0
+
+[node name="item_info" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 280.0
+offset_top = 144.0
+offset_right = 320.0
+offset_bottom = 184.0
+
+[node name="item_name" type="Label" parent="item_info"]
+layout_mode = 0
+offset_left = -88.0
+offset_top = -72.0
+offset_right = 168.0
+offset_bottom = -16.0
+theme_override_font_sizes/font_size = 30
+text = "Sword"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="item_desc" type="Label" parent="item_info"]
+layout_mode = 0
+offset_left = -88.0
+offset_top = 264.0
+offset_right = 232.0
+offset_bottom = 360.0
+text = "This is a item...."
+vertical_alignment = 1
+
+[node name="item_sprite" type="Sprite2D" parent="item_info"]
+position = Vector2(40, 136)
+scale = Vector2(14, 14)
+texture = ExtResource("2_akjtp")
+
+[node name="Buy" type="Button" parent="."]
+offset_left = 592.0
+offset_top = 512.0
+offset_right = 716.534
+offset_bottom = 552.0
+text = "Buy"
+
+[node name="close" type="Button" parent="."]
+offset_left = 912.0
+offset_top = 512.0
+offset_right = 1063.53
+offset_bottom = 552.0
+text = "Close"
+
+[connection signal="pressed" from="Buy" to="." method="_on_buy_pressed"]
+[connection signal="pressed" from="close" to="." method="_on_close_pressed"]

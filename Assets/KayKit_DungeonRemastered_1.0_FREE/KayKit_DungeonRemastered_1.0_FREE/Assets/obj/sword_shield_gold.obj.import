@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://delntd0th4gr1"
+path="res://.godot/imported/sword_shield_gold.obj-3ac0b4e20ddaf7bd20563f1e32086f67.mesh"
+
+[deps]
+
+files=["res://.godot/imported/sword_shield_gold.obj-3ac0b4e20ddaf7bd20563f1e32086f67.mesh"]
+
+source_file="res://Assets/KayKit_DungeonRemastered_1.0_FREE/KayKit_DungeonRemastered_1.0_FREE/Assets/obj/sword_shield_gold.obj"
+dest_files=["res://.godot/imported/sword_shield_gold.obj-3ac0b4e20ddaf7bd20563f1e32086f67.mesh", "res://.godot/imported/sword_shield_gold.obj-3ac0b4e20ddaf7bd20563f1e32086f67.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

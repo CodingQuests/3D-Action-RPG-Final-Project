@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bydv43jsu4p78"
+path="res://.godot/imported/box_small.obj-9f31347cdfa54750b6199b2252a6509b.mesh"
+
+[deps]
+
+files=["res://.godot/imported/box_small.obj-9f31347cdfa54750b6199b2252a6509b.mesh"]
+
+source_file="res://Assets/KayKit_DungeonRemastered_1.0_FREE/KayKit_DungeonRemastered_1.0_FREE/Assets/obj/box_small.obj"
+dest_files=["res://.godot/imported/box_small.obj-9f31347cdfa54750b6199b2252a6509b.mesh", "res://.godot/imported/box_small.obj-9f31347cdfa54750b6199b2252a6509b.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

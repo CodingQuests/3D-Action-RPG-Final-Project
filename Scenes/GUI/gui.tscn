@@ -1,0 +1,70 @@
+[gd_scene load_steps=6 format=3 uid="uid://ck24w3p7qi5em"]
+
+[ext_resource type="PackedScene" uid="uid://cvb3c1vqdq7m0" path="res://Scenes/GUI/Inventory/inventory.tscn" id="1_qawcy"]
+[ext_resource type="Script" path="res://Scripts/GUI/gui.gd" id="1_uh8vs"]
+[ext_resource type="Texture2D" uid="uid://cjid80mokonss" path="res://Assets/ui_big_pieces.png" id="2_7nymg"]
+[ext_resource type="PackedScene" uid="uid://bey2b417nhdeh" path="res://Scenes/GUI/profile.tscn" id="4_pevb2"]
+[ext_resource type="PackedScene" uid="uid://65i6qc317fkr" path="res://Scenes/GUI/shop.tscn" id="5_hocfb"]
+
+[node name="GUI" type="CanvasLayer"]
+process_mode = 3
+script = ExtResource("1_uh8vs")
+
+[node name="UiBigPieces" type="Sprite2D" parent="."]
+position = Vector2(116, 34)
+scale = Vector2(2.54795, 2)
+texture = ExtResource("2_7nymg")
+region_enabled = true
+region_rect = Rect2(259.966, 38.1094, 73.0046, 24.137)
+
+[node name="hp_bar" type="ProgressBar" parent="."]
+offset_left = 46.0
+offset_top = 19.0
+offset_right = 184.0
+offset_bottom = 48.0
+value = 100.0
+show_percentage = false
+
+[node name="container" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="BG" type="Panel" parent="container"]
+layout_mode = 0
+offset_left = 168.0
+offset_top = 91.0
+offset_right = 1057.0
+offset_bottom = 547.0
+metadata/_edit_lock_ = true
+
+[node name="Inventory" parent="container" instance=ExtResource("1_qawcy")]
+layout_mode = 1
+offset_right = -40.0
+offset_bottom = -40.0
+
+[node name="Profile" parent="container" instance=ExtResource("4_pevb2")]
+layout_mode = 1
+offset_right = 0.0
+offset_bottom = 0.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="container"]
+layout_mode = 0
+offset_left = 190.0
+offset_top = 184.0
+offset_right = 373.0
+offset_bottom = 451.0
+
+[node name="inventory_button" type="Button" parent="container/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "Inv"
+
+[node name="profile_button" type="Button" parent="container/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "Profile"
+
+[node name="shop" parent="." instance=ExtResource("5_hocfb")]
+
+[connection signal="pressed" from="container/VBoxContainer/inventory_button" to="." method="_on_inventory_button_pressed"]
+[connection signal="pressed" from="container/VBoxContainer/profile_button" to="." method="_on_profile_button_pressed"]

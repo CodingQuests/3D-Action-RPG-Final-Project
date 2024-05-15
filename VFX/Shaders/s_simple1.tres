@@ -1,0 +1,123 @@
+[gd_resource type="VisualShader" load_steps=9 format=3 uid="uid://dgwac6mam38tg"]
+
+[sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_db0yx"]
+parameter_name = "Main_Texture"
+texture_type = 1
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_ehvfy"]
+expanded_output_ports = [0]
+input_name = "color"
+
+[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_3spoj"]
+operator = 2
+
+[sub_resource type="VisualShaderNodeProximityFade" id="VisualShaderNodeProximityFade_ntf5i"]
+default_input_values = [0, 0.5]
+
+[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_8641m"]
+operator = 2
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_tq3oa"]
+expanded_output_ports = [0]
+source = 5
+texture_type = 1
+
+[sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_yej4j"]
+parameter_name = "Proximity_Fade"
+hint = 1
+default_value_enabled = true
+default_value = 0.5
+
+[sub_resource type="VisualShaderNodeBillboard" id="VisualShaderNodeBillboard_rs84t"]
+billboard_type = 3
+keep_scale = true
+
+[resource]
+code = "shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_schlick_ggx, unshaded, shadows_disabled;
+
+uniform sampler2D Main_Texture : source_color;
+uniform float Proximity_Fade : hint_range(0, 1) = 0.5;
+uniform sampler2D depth_tex_frg_5 : hint_depth_texture;
+
+
+
+void vertex() {
+	mat4 n_out2p0;
+// GetBillboardMatrix:2
+	{
+		mat4 __wm = mat4(normalize(INV_VIEW_MATRIX[0]), normalize(INV_VIEW_MATRIX[1]), normalize(INV_VIEW_MATRIX[2]), MODEL_MATRIX[3]);
+		__wm = __wm * mat4(vec4(cos(INSTANCE_CUSTOM.x), -sin(INSTANCE_CUSTOM.x), 0.0, 0.0), vec4(sin(INSTANCE_CUSTOM.x), cos(INSTANCE_CUSTOM.x), 0.0, 0.0), vec4(0.0, 0.0, 1.0, 0.0), vec4(0.0, 0.0, 0.0, 1.0));
+		__wm = __wm * mat4(vec4(length(MODEL_MATRIX[0].xyz), 0.0, 0.0, 0.0), vec4(0.0, length(MODEL_MATRIX[1].xyz), 0.0, 0.0), vec4(0.0, 0.0, length(MODEL_MATRIX[2].xyz), 0.0), vec4(0.0, 0.0, 0.0, 1.0));
+		n_out2p0 = VIEW_MATRIX * __wm;
+	}
+
+
+// Output:0
+	MODELVIEW_MATRIX = n_out2p0;
+
+
+}
+
+void fragment() {
+// Input:3
+	vec4 n_out3p0 = COLOR;
+	float n_out3p4 = n_out3p0.a;
+
+
+	vec4 n_out7p0;
+// Texture2D:7
+	n_out7p0 = texture(Main_Texture, UV);
+	float n_out7p1 = n_out7p0.r;
+
+
+// FloatOp:4
+	float n_out4p0 = n_out3p4 * n_out7p1;
+
+
+// FloatParameter:8
+	float n_out8p0 = Proximity_Fade;
+
+
+	float n_out5p0;
+// ProximityFade:5
+	{
+		float __depth_tex = texture(depth_tex_frg_5, SCREEN_UV).r;
+		vec4 __depth_world_pos = INV_PROJECTION_MATRIX * vec4(SCREEN_UV * 2.0 - 1.0, __depth_tex, 1.0);
+		__depth_world_pos.xyz /= __depth_world_pos.w;
+		n_out5p0 = clamp(1.0 - smoothstep(__depth_world_pos.z + n_out8p0, __depth_world_pos.z, VERTEX.z), 0.0, 1.0);
+	}
+
+
+// FloatOp:6
+	float n_out6p0 = n_out4p0 * n_out5p0;
+
+
+// Output:0
+	ALBEDO = vec3(n_out3p0.xyz);
+	ALPHA = n_out6p0;
+
+
+}
+"
+flags/unshaded = true
+flags/shadows_disabled = true
+nodes/vertex/2/node = SubResource("VisualShaderNodeBillboard_rs84t")
+nodes/vertex/2/position = Vector2(100, 360)
+nodes/vertex/connections = PackedInt32Array(2, 0, 0, 10)
+nodes/fragment/0/position = Vector2(620, 140)
+nodes/fragment/2/node = SubResource("VisualShaderNodeTexture2DParameter_db0yx")
+nodes/fragment/2/position = Vector2(-580, 440)
+nodes/fragment/3/node = SubResource("VisualShaderNodeInput_ehvfy")
+nodes/fragment/3/position = Vector2(-240, 100)
+nodes/fragment/4/node = SubResource("VisualShaderNodeFloatOp_3spoj")
+nodes/fragment/4/position = Vector2(152.837, 297.389)
+nodes/fragment/5/node = SubResource("VisualShaderNodeProximityFade_ntf5i")
+nodes/fragment/5/position = Vector2(200, 580)
+nodes/fragment/6/node = SubResource("VisualShaderNodeFloatOp_8641m")
+nodes/fragment/6/position = Vector2(404.316, 354.888)
+nodes/fragment/7/node = SubResource("VisualShaderNodeTexture_tq3oa")
+nodes/fragment/7/position = Vector2(-134.473, 418.137)
+nodes/fragment/8/node = SubResource("VisualShaderNodeFloatParameter_yej4j")
+nodes/fragment/8/position = Vector2(-60, 700)
+nodes/fragment/connections = PackedInt32Array(3, 0, 0, 0, 3, 4, 4, 0, 4, 0, 6, 0, 5, 0, 6, 1, 6, 0, 0, 1, 2, 0, 7, 2, 7, 1, 4, 1, 8, 0, 5, 0)

@@ -1,0 +1,53 @@
+[gd_scene load_steps=10 format=3 uid="uid://ccdifaij7iykp"]
+
+[ext_resource type="Shader" uid="uid://cbctxpf3ajcpc" path="res://VFX/Shaders/s_puff.tres" id="1_6vebj"]
+[ext_resource type="Texture2D" uid="uid://4yxd0gw486dx" path="res://VFX/Textures/T_PerlinNoise_Tiled.png" id="2_in4ho"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bx2os"]
+render_priority = 0
+shader = ExtResource("1_6vebj")
+shader_parameter/Proximity_Fade = 0.5
+shader_parameter/Vertex_Noise = ExtResource("2_in4ho")
+
+[sub_resource type="Curve" id="Curve_mkfny"]
+_data = [Vector2(0.521739, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_k81j1"]
+texture_mode = 1
+curve = SubResource("Curve_mkfny")
+
+[sub_resource type="Curve" id="Curve_ea4pd"]
+_data = [Vector2(0, 1), 0.0, -0.269462, 0, 0, Vector2(1, 0.290348), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_q7i3a"]
+curve = SubResource("Curve_ea4pd")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_8g7o0"]
+particle_flag_align_y = true
+emission_shape = 1
+emission_sphere_radius = 0.1
+angle_min = -180.0
+angle_max = 180.0
+direction = Vector3(0, 0.3, -1)
+spread = 10.0
+initial_velocity_min = 5.0
+initial_velocity_max = 8.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.5
+scale_max = 0.8
+scale_curve = SubResource("CurveTexture_q7i3a")
+alpha_curve = SubResource("CurveTexture_k81j1")
+
+[sub_resource type="SphereMesh" id="SphereMesh_28623"]
+
+[node name="VFX_puff_run" type="GPUParticles3D"]
+material_override = SubResource("ShaderMaterial_bx2os")
+emitting = false
+amount = 5
+lifetime = 0.2
+one_shot = true
+explosiveness = 0.8
+process_material = SubResource("ParticleProcessMaterial_8g7o0")
+draw_pass_1 = SubResource("SphereMesh_28623")

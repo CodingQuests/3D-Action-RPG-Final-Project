@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bmvts73yx7lxn"
+path="res://.godot/imported/Skeleton_Staff.obj-6f24897d9ae5614161a5e32a36e5067d.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Skeleton_Staff.obj-6f24897d9ae5614161a5e32a36e5067d.mesh"]
+
+source_file="res://Assets/KayKit_Skeletons_1.0_FREE/KayKit_Skeletons_1.0_FREE/assets/obj/Skeleton_Staff.obj"
+dest_files=["res://.godot/imported/Skeleton_Staff.obj-6f24897d9ae5614161a5e32a36e5067d.mesh", "res://.godot/imported/Skeleton_Staff.obj-6f24897d9ae5614161a5e32a36e5067d.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false
