@@ -1,2 +1,8 @@
 # Godot 4+ specific ignores
 .godot/
+
+# Third-party assets whose licenses do not allow redistribution. Download them
+# yourself (see README.md); they stay out of git.
+Assets/Minifantasy_Dungeon_SFX/
+Assets/joystix monospace.otf
+Assets/joystix monospace.otf.import

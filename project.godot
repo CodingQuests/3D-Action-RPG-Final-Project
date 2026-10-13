@@ -31,7 +31,7 @@ import/fbx/enabled=false
 [gui]
 
 theme/custom="res://Assets/default.tres"
-theme/custom_font="res://Assets/joystix monospace.otf"
+theme/custom_font="res://Assets/fonts/PixelOperator8.ttf"
 
 [input]
 

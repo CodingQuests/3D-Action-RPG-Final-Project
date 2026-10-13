@@ -1,7 +1,7 @@
 [gd_resource type="Theme" load_steps=11 format=3 uid="uid://dkxtn4tdxqx6f"]
 
 [ext_resource type="Texture2D" uid="uid://cjid80mokonss" path="res://Assets/ui_big_pieces.png" id="1_svfo7"]
-[ext_resource type="FontFile" uid="uid://brv4t28hykh2f" path="res://Assets/joystix monospace.otf" id="1_xnxu5"]
+[ext_resource type="FontFile" path="res://Assets/fonts/PixelOperator8.ttf" id="1_xnxu5"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_jc5nh"]
 texture = ExtResource("1_svfo7")

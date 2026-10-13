@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://4gxxy80jpk1c" path="res://Assets/KayKit_Adventurers_1.0_FREE/KayKit_Adventurers_1.0_FREE/Assets/gltf/barbarian_texture.png" id="2_r137v"]
 [ext_resource type="Texture2D" uid="uid://bcurg8bxcsbe0" path="res://Assets/KayKit_Adventurers_1.0_FREE/KayKit_Adventurers_1.0_FREE/Assets/gltf/knight_texture.png" id="3_1iypq"]
 [ext_resource type="Texture2D" uid="uid://bm18of170jk5t" path="res://Assets/KayKit_Adventurers_1.0_FREE/KayKit_Adventurers_1.0_FREE/Characters/gltf/Knight_knight_texture.png" id="3_8k7pj"]
-[ext_resource type="AudioStream" uid="uid://c0om6jy32k1kb" path="res://Assets/Minifantasy_Dungeon_SFX/04_sack_open_1.wav" id="5_f542r"]
+[ext_resource type="AudioStream" path="res://Assets/SFX/item_pickup.wav" id="5_f542r"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2oae4"]
 resource_name = "barbarian_texture"
